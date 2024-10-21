@@ -12,7 +12,7 @@
     "test": "nyc mocha",
     "test:acceptance": "npx cucumber-js",
     "test:performance": "npx artillery run -e local performance-test/artillery/node-express.yml --output artillery-test.json",
-    "test:performance-report": "npx artillery ARTILLERY_DISABLE_TELEMETRY true report --output artillery-report.html artillery-test.json"
+    "test:performance-report": "npx artillery report --output artillery-report.html artillery-test.json"
   },
   "repository": {
     "type": "git",
