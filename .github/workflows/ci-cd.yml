@@ -14,7 +14,7 @@ jobs:
       - name: Install node modules
         run: npm install
   unit-test:
-    needs: [build]
+    needs: [ build ]
     runs-on: ubuntu-latest
     container:
       image: node:18.17.0
@@ -41,7 +41,7 @@ jobs:
           output: both
           thresholds: '80'
   deploy:
-    needs: [build, unit-test]
+    needs: [ build, unit-test ]
     runs-on: ubuntu-latest
     env:
       RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
@@ -55,7 +55,7 @@ jobs:
       - name: Sleep By Two Minutes
         run: sleep 120
   acceptance-test:
-    needs: [deploy]
+    needs: [ deploy ]
     runs-on: ubuntu-latest
     container:
       image: node:18.17.0
@@ -70,7 +70,7 @@ jobs:
           name: cucumber-report.html
           path: cucumber-report.html
   performance-test-artillery:
-    needs: [acceptance-test]
+    needs: [ acceptance-test ]
     runs-on: ubuntu-latest
     container:
       image: node:18.17.0
@@ -91,7 +91,7 @@ jobs:
   performance-test-jmeter:
     permissions:
       contents: write
-    needs: [acceptance-test]
+    needs: [ acceptance-test ]
     runs-on: ubuntu-latest
     container:
       image: openjdk:8
