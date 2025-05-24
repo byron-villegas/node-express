@@ -1,7 +1,5 @@
 const Authorization = require("../constants/authorization");
 const HttpStatus = require("../constants/http-status");
-const Number = require("../constants/number");
-const Symbol = require("../constants/symbol");
 const { verifyToken } = require("../helpers/jwt.helper");
 
 const authorizationMiddleware = (req, res, next) => {
@@ -15,7 +13,7 @@ const authorizationMiddleware = (req, res, next) => {
         return res.status(HttpStatus.UNAUTHORIZED).send();
     }
 
-    const token = headers.authorization.substring(headers.authorization.indexOf(Symbol.SPACE) + Number.ONE, headers.authorization.length).trim();
+    const token = headers.authorization.substring(headers.authorization.indexOf(' ') + 1, headers.authorization.length).trim();
     
     if (!verifyToken(token)) {
         return res.status(HttpStatus.UNAUTHORIZED).send();

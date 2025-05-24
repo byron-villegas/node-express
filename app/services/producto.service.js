@@ -1,7 +1,4 @@
-const DataType = require('../constants/data-type');
 const ErrorMessage = require('../constants/error-message');
-const Regex = require('../constants/regex');
-const Symbol = require('../constants/symbol');
 const productos = require('../data/productos.json');
 const ErrorNegocioException = require('../exceptions/error-negocio.exception');
 const ErrorTecnicoException = require('../exceptions/error-tecnico.exception');
@@ -11,7 +8,7 @@ const findAll = () => {
 }
 
 const findBySku = (sku) => new Promise((resolve) => {
-    if (!sku.match(Regex.ONLY_NUMBERS)) {
+    if (!sku.match(/^\d+$/)) {
         throw new ErrorNegocioException(ErrorMessage.CODIGO_SKU_DEBE_SER_NUMERO_ENTERO, ErrorMessage.MENSAJE_SKU_DEBE_SER_NUMERO_ENTERO);
     }
 
@@ -30,12 +27,12 @@ const findByPropertyAndValue = (property, value) => new Promise((resolve) => {
         throw new ErrorNegocioException(ErrorMessage.CODIGO_PROPIEDAD_NO_ENCONTRADA, ErrorMessage.MENSAJE_PROPIEDAD_NO_ENCONTRADA);
     }
 
-    if ((typeof producto[property]) === DataType.NUMBER && isNaN(parseInt(value))) {
+    if ((typeof producto[property]) === 'number' && isNaN(parseInt(value))) {
         throw new ErrorTecnicoException(ErrorMessage.CODIGO_FORMATO_DE_VALOR_NO_PERMITIDO_PARA_LA_PROPIEDAD, ErrorMessage.MENSAJE_FORMATO_DE_VALOR_NO_PERMITIDO_PARA_LA_PROPIEDAD);
     }
 
     const productosFiltrados = productos.filter(producto => {
-        if ((typeof producto[property]) === DataType.NUMBER && !isNaN(parseInt(value))) {
+        if ((typeof producto[property]) === 'number' && !isNaN(parseInt(value))) {
             return producto[property] == value;
         }
         else {
@@ -47,7 +44,7 @@ const findByPropertyAndValue = (property, value) => new Promise((resolve) => {
 });
 
 const sortByProperty = (property) => new Promise((resolve) => {
-    const propiedad = property.includes(Symbol.MINUS) || property.includes(Symbol.PLUS) ? property.substring(1).trim() : property.trim();
+    const propiedad = property.includes('-') || property.includes('+') ? property.substring(1).trim() : property.trim();
 
     if (!productos[0][propiedad]) {
         throw new Error('Propiedad no encontrada');
