@@ -11,6 +11,13 @@ jobs:
       image: node:18.17.0
     steps:
       - uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install node modules
         run: npm install
   unit-test:
@@ -20,6 +27,13 @@ jobs:
       image: node:18.17.0
     steps:
       - uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install Node Modules
         run: npm install
       - name: Run Tests With Coverage With Console And HTML Report
@@ -61,6 +75,13 @@ jobs:
       image: node:18.17.0
     steps:
       - uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install Node Modules
         run: npm install
       - name: Run Acceptance Tests
