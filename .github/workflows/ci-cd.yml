@@ -97,6 +97,13 @@ jobs:
       image: node:18.17.0
     steps:
       - uses: actions/checkout@v4
+      - name: Cache node modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install Node Modules
         run: npm install
       - name: Run Artillery Performance Tests
