@@ -1,6 +1,7 @@
 const { readFileSync } = require('fs');
 const { join } = require('path');
 const expressPackage = require('express/package.json');
+const swaggerDocument = require('../docs/swagger.json');
 
 const config = {
     bannerFilename: 'banner.txt',
@@ -22,7 +23,7 @@ const config = {
         title: 'Node Express',
         version: '1.0.0',
         path: '/swagger-ui',
-        document: require('../docs/swagger.json')
+        document: swaggerDocument
     }
 }
 
