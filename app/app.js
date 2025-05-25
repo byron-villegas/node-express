@@ -5,6 +5,12 @@ const { requestLoggerMiddleware } = require('./middlewares/request-logger-middle
 const { errorMiddleware } = require('./middlewares/error.middleware');
 const { errorLoggerMiddleware } = require('./middlewares/error-logger.middleware');
 
+// Swagger setup
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs/swagger.json');
+
+server.use('/swagger-ui', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 server.use(requestLoggerMiddleware);
 
 server.use(config.server.context + config.routes.auth, require('./routes/auth.route'));

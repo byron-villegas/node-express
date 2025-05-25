@@ -1,0 +1,177 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Node Express",
+    "description": "Proyecto base para aplicaciones Express con ejemplos de configuración, testing y buenas prácticas.",
+    "termsOfService": "https://swagger.io/terms/",
+    "contact": {
+      "name": "Byron Villegas Moya",
+      "email": "byronvillegasm@gmail.com"
+    },
+    "license": {
+      "name": "MIT",
+      "url": "https://github.com/byron-villegas/node-express/blob/main/LICENSE"
+    },
+    "version": "1.0.0"
+  },
+  "externalDocs": {
+    "description": "Repository",
+    "url": "https://github.com/byron-villegas/node-express"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Local Server"
+    },
+    {
+      "url": "https://node-express-mp7s.onrender.com/api",
+      "description": "Production Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Producto",
+      "description": "Servicios relacionados a los productos"
+    }
+  ],
+  "paths": {
+    "/productos": {
+      "get": {
+        "tags": ["Producto"],
+        "summary": "Encuentra todos los productos",
+        "description": "Encuentra todos los productos",
+        "operationId": "findAllProducts",
+        "responses": {
+          "200": {
+            "description": "Retorna exitosamente todos los productos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Producto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/productos/{sku}": {
+      "get": {
+        "tags": ["Producto"],
+        "summary": "Encuentra un producto por sku",
+        "description": "Encuentra un producto por sku",
+        "operationId": "findProductBySku",
+        "parameters": [
+          {
+            "name": "sku",
+            "in": "path",
+            "required": true,
+            "description": "El sku del producto que deseas buscar",
+            "schema": {
+              "type": "integer",
+              "example": 123456
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna el producto encontrado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Producto no encontrado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Producto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 10
+          },
+          "sku": {
+            "type": "integer",
+            "example": 123456
+          },
+          "imagen": {
+            "type": "string",
+            "example": "https://example.com/image.jpg"
+          },
+          "nombre": {
+            "type": "string",
+            "example": "Nintendo Switch"
+          },
+          "descripcion": {
+            "type": "string",
+            "example": "Consola de videojuegos Nintendo Switch"
+          },
+          "caracteristicas": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Caracteristica"
+            }
+          }
+        }
+      },
+      "Caracteristica": {
+        "type": "object",
+        "properties": {
+          "titulo": {
+            "type": "string",
+            "example": "Resolución"
+          },
+          "valor": {
+            "type": "string",
+            "example": "1280x720"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "petstore_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+            "scopes": {
+              "write:pets": "modify pets in your account",
+              "read:pets": "read your pets"
+            }
+          }
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}
