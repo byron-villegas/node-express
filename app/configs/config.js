@@ -20,7 +20,9 @@ const config = {
     },
     swagger: {
         title: 'Node Express',
-        version: '1.0.0'
+        version: '1.0.0',
+        path: '/swagger-ui',
+        document: require('../docs/swagger.json')
     }
 }
 
