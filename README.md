@@ -228,7 +228,7 @@ Para usar el Loggeo de Errores Middleware debemos importarlo y usarlo en la apli
 const server = require('./configs/server.config');
 const { config } = require('./configs/config');
 
-const { requestLoggerMiddleware } = require('./middlewares/request-logger-middleware');
+const { requestLoggerMiddleware } = require('./middlewares/request-logger.middleware');
 const { errorMiddleware } = require('./middlewares/error.middleware');
 const { errorLoggerMiddleware } = require('./middlewares/error-logger.middleware');
 
@@ -290,7 +290,7 @@ Para usar el Respuesta Personalizada por Tipo de Error (HTTP STATUS) Middleware 
 const server = require('./configs/server.config');
 const { config } = require('./configs/config');
 
-const { requestLoggerMiddleware } = require('./middlewares/request-logger-middleware');
+const { requestLoggerMiddleware } = require('./middlewares/request-logger.middleware');
 const { errorMiddleware } = require('./middlewares/error.middleware');
 const { errorLoggerMiddleware } = require('./middlewares/error-logger.middleware');
 
