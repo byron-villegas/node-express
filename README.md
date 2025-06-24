@@ -95,7 +95,6 @@ Para ejecutar la imagen debemos utilizar el siguiente comando
 docker run -p 3000:3000 node-express
 ```
 
-
 ## Middleware 🚏
 Un middleware es una función que se puede ejecutar antes o después del manejo de una ruta. Esta función tiene acceso al objeto Request, Response y la función next().
 
