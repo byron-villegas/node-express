@@ -78,6 +78,24 @@ La aplicación se desplegará exitosamente mostrando el siguiente resultado en c
 Server is listening on http://localhost:3000/api
 ```
 
+## Docker 🐋
+A continuacion dejo los comandos a utilizar para generar la imagen y posteriormente ejecutarla
+
+### Imagen
+Para generar la imagen debemos utilizar el siguiente comando
+
+```shell
+docker build -t node-express .
+```
+
+### Ejecutar
+Para ejecutar la imagen debemos utilizar el siguiente comando
+
+```shell
+docker run -p 3000:3000 node-express
+```
+
+
 ## Middleware 🚏
 Un middleware es una función que se puede ejecutar antes o después del manejo de una ruta. Esta función tiene acceso al objeto Request, Response y la función next().
 
