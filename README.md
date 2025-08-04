@@ -1277,7 +1277,7 @@ Server is listening on http://localhost:3000/api
 
 ## Swagger
 ### Documentar Endpoints
-Para la documentacion debemos hacerlo de forma manual mediante un archivo **/app/docs/swagger.json** 
+Para documentar los endpoints debemos hacerlo de forma manual mediante un archivo **/app/docs/swagger.json** 
 
 ### Configurar Swagger UI
 Para configurar Swager UI simplemente debemos agregar el siguiente codigo en el archivo **/app/app.js**
