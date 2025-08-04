@@ -1275,6 +1275,38 @@ La aplicación se desplegará exitosamente mostrando el siguiente resultado en c
 Server is listening on http://localhost:3000/api
 ```
 
+## Swagger
+### Documentar Endpoints
+Para la documentacion debemos hacerlo de forma manual mediante un archivo **/app/docs/swagger.json** 
+
+### Configurar Swagger UI
+Para configurar Swager UI simplemente debemos agregar el siguiente codigo en el archivo **/app/app.js**
+
+```javascript
+const swaggerUi = require('swagger-ui-express');
+
+// Swagger setup
+server.use(config.swagger.path, swaggerUi.serve, swaggerUi.setup(config.swagger.document));
+```
+
+para configurar swager ui utitlizamos la siguiente configuracion
+
+```javascript
+const swaggerDocument = require('../docs/swagger.json');
+
+const config = {
+  swagger: {
+    title: 'Node Express',
+    version: '1.0.0',
+    path: '/swagger-ui',
+    document: swaggerDocument
+  }
+}
+```
+
+Cuando ejecutemos a la aplicacion debemos entrar a la pagina **/swagger-ui/**
+
+
 ## Construido con 🛠️
 
 _Menciona las herramientas que utilizaste para crear tu proyecto_

@@ -1,3 +1,5 @@
+const swaggerUi = require('swagger-ui-express');
+
 const server = require('./configs/server.config');
 const { config } = require('./configs/config');
 
@@ -6,8 +8,6 @@ const { errorMiddleware } = require('./middlewares/error.middleware');
 const { errorLoggerMiddleware } = require('./middlewares/error-logger.middleware');
 
 // Swagger setup
-const swaggerUi = require('swagger-ui-express');
-
 server.use(config.swagger.path, swaggerUi.serve, swaggerUi.setup(config.swagger.document));
 
 server.use(requestLoggerMiddleware);
