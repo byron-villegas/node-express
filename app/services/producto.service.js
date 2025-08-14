@@ -1,16 +1,18 @@
 const ErrorMessage = require('../constants/error-message');
-const productos = require('../data/productos.json');
 const ErrorNegocioException = require('../exceptions/error-negocio.exception');
 const ErrorTecnicoException = require('../exceptions/error-tecnico.exception');
+const productoRepository = require('../repositories/producto.repository');
 
 const findAll = () => {
-    return productos;
+    return productoRepository.getProducts();
 }
 
 const findBySku = (sku) => new Promise((resolve) => {
     if (!sku.match(/^\d+$/)) {
         throw new ErrorNegocioException(ErrorMessage.CODIGO_SKU_DEBE_SER_NUMERO_ENTERO, ErrorMessage.MENSAJE_SKU_DEBE_SER_NUMERO_ENTERO);
     }
+
+    let productos = productoRepository.getProducts();
 
     const producto = productos.find(producto => producto.sku == parseInt(sku));
 
@@ -22,7 +24,10 @@ const findBySku = (sku) => new Promise((resolve) => {
 });
 
 const findByPropertyAndValue = (property, value) => new Promise((resolve) => {
-    const producto = findAll()[0];
+    let productos = productoRepository.getProducts();
+
+    const producto = productos[0];
+    
     if (!producto[property]) {
         throw new ErrorNegocioException(ErrorMessage.CODIGO_PROPIEDAD_NO_ENCONTRADA, ErrorMessage.MENSAJE_PROPIEDAD_NO_ENCONTRADA);
     }
@@ -34,8 +39,7 @@ const findByPropertyAndValue = (property, value) => new Promise((resolve) => {
     const productosFiltrados = productos.filter(producto => {
         if ((typeof producto[property]) === 'number' && !isNaN(parseInt(value))) {
             return producto[property] == value;
-        }
-        else {
+        } else {
             return producto[property].toUpperCase().includes(value.toUpperCase());
         }
     });
@@ -44,6 +48,8 @@ const findByPropertyAndValue = (property, value) => new Promise((resolve) => {
 });
 
 const sortByProperty = (property) => new Promise((resolve) => {
+    let productos = productoRepository.getProducts();
+
     const propiedad = property.includes('-') || property.includes('+') ? property.substring(1).trim() : property.trim();
 
     if (!productos[0][propiedad]) {
@@ -63,4 +69,11 @@ const sortByProperty = (property) => new Promise((resolve) => {
     resolve(productosOrdenados);
 });
 
-module.exports = { findAll, findBySku, findByPropertyAndValue, sortByProperty };
+const productoService = {
+    findAll,
+    findBySku,
+    findByPropertyAndValue,
+    sortByProperty
+};
+
+module.exports = productoService;

@@ -1,8 +1,12 @@
 const HttpStatus = require('../constants/http-status');
-const { findAll } = require('../services/usuario.service');
+const usuarioService = require('../services/usuario.service');
 
 const getUsuarios = (req, res, next) => {
-    res.status(HttpStatus.OK).send(findAll());
+    res.status(HttpStatus.OK).send(usuarioService.findAll());
 }
 
-module.exports = { getUsuarios }
+const usuarioController = {
+    getUsuarios
+};
+
+module.exports = usuarioController;

@@ -15,6 +15,7 @@ server.use(requestLoggerMiddleware);
 server.use(config.server.context + config.routes.auth, require('./routes/auth.route'));
 server.use(config.server.context + config.routes.usuarios, require('./routes/usuario.route'))
 server.use(config.server.context + config.routes.productos, require('./routes/producto.route'));
+server.use(config.server.context + config.routes.monsterHunter, require('./routes/monster-hunter.route'));
 
 server.use(errorLoggerMiddleware);
 server.use(errorMiddleware);

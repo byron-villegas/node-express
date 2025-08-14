@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { getProductos, getProductoBySku } = require('../controllers/producto.controller');
+const productoController = require('../controllers/producto.controller');
 
-router.get('', getProductos);
-router.get('/:sku', getProductoBySku);
+router.get('', productoController.getProductos);
+router.get('/:sku', productoController.getProductoBySku);
 
 module.exports = router;

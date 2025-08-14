@@ -1,11 +1,18 @@
-const usuarios = require('../data/usuarios.json');
+const usuarioRepository = require('../repositories/usuario.repository');
 
 const findAll = () => {
-    return usuarios;
+    return usuarioRepository.getUsers();
 }
 
 const findByUsernameAndPassword = (username, password) => {
+    let usuarios = usuarioRepository.getUsers();
+    
     return usuarios.find(usuario => usuario.username === username && usuario.password === password);
 }
 
-module.exports = { findAll, findByUsernameAndPassword }
+const usuarioService = {
+    findAll,
+    findByUsernameAndPassword
+};
+
+module.exports = usuarioService;

@@ -17,16 +17,16 @@ const config = {
     routes: {
         auth: '/auth',
         productos: '/productos',
-        usuarios: '/usuarios'
+        usuarios: '/usuarios',
+        monsterHunter: '/monster-hunter'
     },
     swagger: {
-        title: 'Node Express',
+        title: 'node-express',
         version: '1.0.0',
         path: '/swagger-ui',
         document: swaggerDocument
     }
 }
-
 
 const showBanner = () => {
     const banner = readFileSync(join(__dirname, config.bannerFilename), 'utf8');
